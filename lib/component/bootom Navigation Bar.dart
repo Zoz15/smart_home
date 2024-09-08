@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
+import 'package:flutter_svg/svg.dart';
 
 class MyBottomNavigationBar extends StatelessWidget {
   const MyBottomNavigationBar({super.key});
@@ -11,73 +11,55 @@ class MyBottomNavigationBar extends StatelessWidget {
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
         child: Container(
-          height: 70,
+          height: 90,
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
-            color: const Color(0xF0F9F9F9).withOpacity(0.1),
+            color: Colors.black.withOpacity(0.08),
           ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 60),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _buildHomeIcon(),
-                _buildUserIcon(),
-              ],
-            ),
+          child: Stack(
+            children: [
+              Align(
+                alignment: Alignment.bottomRight,
+                child: SvgPicture.asset(
+                  'assets/vectors/shap_right.svg',
+                  fit: BoxFit.contain,
+                  //height: 30,
+                ),
+              ),
+              Align(
+                alignment: Alignment.bottomLeft,
+                child: SvgPicture.asset(
+                  'assets/vectors/shap_left.svg',
+                  fit: BoxFit.contain,
+                  //height: 30,
+                ),
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      _buildIcon('assets/vectors/home_icon.svg', 40),
+                      _buildIcon('assets/vectors/user_icon.svg', 45),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
     );
   }
 
-  Widget _buildHomeIcon() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        _buildGradientIcon(Icons.home),
-        const SizedBox(height: 4),
-        _buildGradientBar(),
-      ],
-    );
-  }
-
-  Widget _buildGradientIcon(IconData icon) {
-    return SizedBox(
-      width: 30,
-      height: 30,
-      child: ShaderMask(
-        blendMode: BlendMode.srcIn,
-        shaderCallback: (Rect bounds) => _createGradient().createShader(bounds),
-        child: Icon(icon, size: 30),
-      ),
-    );
-  }
-
-  Widget _buildGradientBar() {
-    return Container(
-      height: 2,
-      width: 15,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        gradient: _createGradient(),
-      ),
-    );
-  }
-
-  Widget _buildUserIcon() {
-    return const SizedBox(
-      width: 25,
-      height: 25,
-      child: Icon(Iconsax.user),
-    );
-  }
-
-  LinearGradient _createGradient() {
-    return const LinearGradient(
-      begin: Alignment.centerLeft,
-      end: Alignment.centerRight,
-      colors: [Color(0xff5dabf5), Color(0xFFA480CF)],
+  Widget _buildIcon(String icon, double size) {
+    return SvgPicture.asset(
+      icon,
+      color: Colors.white,
+      fit: BoxFit.contain,
+      height: size,
     );
   }
 }

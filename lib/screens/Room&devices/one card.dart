@@ -1,6 +1,9 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_home/screens/Home_Screen.dart';
+import 'package:smart_home/var/var.dart';
 
 const double _kRadius = 25;
 const Radius _radius = Radius.circular(_kRadius);
@@ -86,11 +89,10 @@ class _OneCardState extends State<OneCard> {
                       child: _isOn
                           ? ShaderMask(
                               blendMode: BlendMode.srcIn,
-                              shaderCallback: (Rect bounds) =>
-                                  const LinearGradient(
+                              shaderCallback: (Rect bounds) => LinearGradient(
                                 begin: Alignment.centerLeft,
                                 end: Alignment.centerRight,
-                                colors: [Color(0xff5dabf5), Color(0xFFA480CF)],
+                                colors: [mainColor1, mainColor2],
                               ).createShader(bounds),
                               child: Image.asset(
                                 widget.image,
@@ -112,20 +114,25 @@ class _OneCardState extends State<OneCard> {
             padding: const EdgeInsets.all(12.0),
             child: Align(
               alignment: Alignment.topRight,
-              child: Container(
-                height: 30,
-                width: 30,
-                decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(.3),
-                  shape: BoxShape.circle,
-                ),
-                child: InkWell(
-                  onTap: () {
-                    //todo: add more options
-                  },
-                  child: const Icon(
-                    Icons.more_vert,
-                    color: Colors.white,
+              child: ClipOval(
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+                  child: Container(
+                    height: 30,
+                    width: 30,
+                    decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(.08),
+                      shape: BoxShape.circle,
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        //todo: add more options
+                      },
+                      child: const Icon(
+                        Icons.more_vert,
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -207,7 +214,7 @@ class _OneCardState extends State<OneCard> {
               fontSize: 22,
               height: 1.3,
               letterSpacing: 0.3,
-              color: const Color(0x993C3C43),
+              color: !_isOn ? Colors.grey.shade400 : Color(0x993C3C43),
             ),
           ),
         ),
@@ -248,8 +255,8 @@ class _OneCardState extends State<OneCard> {
                 begin: const Alignment(-1.046, -1),
                 end: const Alignment(1.067, 1.104),
                 colors: <Color>[
-                  _isOn ? const Color(0xFF779BE7) : const Color(0xFFE1EAF1),
-                  _isOn ? const Color(0xFFA480CF) : const Color(0xFFC9CED7),
+                  _isOn ? mainColor2 : const Color(0xFFE1EAF1),
+                  _isOn ? mainColor1 : const Color(0xFFC9CED7),
                 ],
                 stops: const <double>[0, 1],
               ),

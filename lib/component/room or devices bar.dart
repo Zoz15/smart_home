@@ -12,6 +12,13 @@ class RoomOrDevicesBar extends StatefulWidget {
 
 class _RoomOrDevicesBarState extends State<RoomOrDevicesBar> {
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    widget.customController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(25, 30, 25, 25),

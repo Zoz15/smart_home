@@ -118,15 +118,21 @@ class _TopNavigationBarState extends State<TopNavigationBar> {
             });
           },
           child: AnimatedContainer(
-            duration: const Duration(milliseconds: 300),
+            duration: const Duration(milliseconds: 100),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               gradient: LinearGradient(
                 begin: const Alignment(-0.861, -0.861),
                 end: const Alignment(1, 1),
                 colors: isReversed
-                    ? <Color>[const Color(0xFFF8FBFF), const Color(0xFFDBE0E7)]
-                    : <Color>[const Color(0xFFDBE0E7), const Color(0xFFF8FBFF)],
+                    ? <Color>[
+                        const Color(0xFFF8FBFF),
+                        const Color.fromARGB(255, 194, 199, 207)
+                      ]
+                    : <Color>[
+                        const Color.fromARGB(255, 194, 199, 207),
+                        const Color(0xFFF8FBFF)
+                      ],
                 stops: const <double>[0, 1],
               ),
               boxShadow: const [
@@ -141,7 +147,10 @@ class _TopNavigationBarState extends State<TopNavigationBar> {
               padding: const EdgeInsets.all(7.2),
               height: 36,
               width: 36,
-              child: SvgPicture.asset('assets/vectors/settings.svg'),
+              child: SvgPicture.asset(
+                'assets/vectors/settings.svg',
+                color: Colors.black54,
+              ),
             ),
           ),
         );

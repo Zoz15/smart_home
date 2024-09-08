@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class Microphone extends StatefulWidget {
   const Microphone({super.key});
@@ -14,7 +15,7 @@ class _MicrophoneState extends State<Microphone> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 30),
+      padding: const EdgeInsets.only(bottom: 20),
       child: GestureDetector(
         onTap: _togglePressed,
         child: _buildMicrophoneButton(),
@@ -53,7 +54,8 @@ class _MicrophoneState extends State<Microphone> {
           height: 90,
           width: 90,
           decoration: BoxDecoration(
-            border: Border.all(color: Colors.white.withOpacity(0.8), width: 0.5),
+            border:
+                Border.all(color: Colors.white.withOpacity(0.8), width: 0.5),
             shape: BoxShape.circle,
           ),
         ),
@@ -124,9 +126,9 @@ class _MicrophoneState extends State<Microphone> {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
       height: 35,
-      child: Image.asset(
-        'assets/icons/mic.png',
-        key: const ValueKey('mic_unpressed'),
+      child: SvgPicture.asset(
+        'assets/vectors/mic.svg',
+        key: const ValueKey('mic_pressed'),
         fit: BoxFit.contain,
       ),
     );
@@ -137,10 +139,12 @@ class _MicrophoneState extends State<Microphone> {
       duration: const Duration(milliseconds: 300),
       height: 40,
       child: ColorFiltered(
-        colorFilter: const ColorFilter.mode(Color(0xff48b6fe), BlendMode.srcATop),
-        child: Image.asset(
-          'assets/icons/mic.png',
+        colorFilter:
+            const ColorFilter.mode(Color(0xff48b6fe), BlendMode.srcATop),
+        child: SvgPicture.asset(
+          'assets/vectors/mic.svg',
           key: const ValueKey('mic_pressed'),
+          height: 30,
           fit: BoxFit.contain,
         ),
       ),

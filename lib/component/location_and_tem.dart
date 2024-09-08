@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:smart_home/var/var.dart';
 
 class MyLocation extends StatelessWidget {
   const MyLocation({super.key});
@@ -29,10 +30,10 @@ class MyLocation extends StatelessWidget {
   BoxDecoration _buildContainerDecoration() {
     return BoxDecoration(
       borderRadius: BorderRadius.circular(22),
-      gradient: const LinearGradient(
+      gradient: LinearGradient(
         begin: Alignment(-1.046, -1),
         end: Alignment(1.067, 1.104),
-        colors: [Color(0xFF779BE7), Color(0xFFA480CF)],
+        colors: [mainColor1, mainColor2],
         stops: [0, 1],
       ),
     );

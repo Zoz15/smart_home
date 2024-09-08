@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:smart_home/component/bootom%20Navigation%20Bar.dart';
 import 'package:smart_home/component/microphone.dart';
 import 'package:smart_home/component/top%20navigation%20bar.dart';
-import 'package:smart_home/component/my%20location.dart';
+import 'package:smart_home/component/location_and_tem.dart';
 import 'package:smart_home/component/room%20or%20devices%20bar.dart';
 import 'package:smart_home/controllers/custom_controller.dart';
 import 'package:smart_home/screens/Room&devices/Devices_Widget.dart';
@@ -20,6 +20,12 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
+
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    widget._customController.dispose();
+  }
   void initState() {
     // TODO: implement initState
     super.initState();

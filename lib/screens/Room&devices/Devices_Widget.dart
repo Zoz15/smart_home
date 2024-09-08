@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:smart_home/controllers/custom_controller.dart';
 import 'package:smart_home/screens/Room&devices/one%20card.dart';
 
 class DevicesWidget extends StatefulWidget {
