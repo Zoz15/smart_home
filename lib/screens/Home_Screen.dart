@@ -4,7 +4,7 @@ import 'package:smart_home/component/microphone.dart';
 import 'package:smart_home/component/top%20navigation%20bar.dart';
 import 'package:smart_home/component/my%20location.dart';
 import 'package:smart_home/component/room%20or%20devices%20bar.dart';
-import 'package:smart_home/screens/Room&devices/Room_Bar.dart';
+import 'package:smart_home/screens/Room&devices/Devices_Widget.dart';
 
 double width = 0;
 double height = 0;
@@ -35,7 +35,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   RoomOrDevicesBar(),
                   //Card1(),
                   //Card1()
-                  RoomBar(),
+                  // RoomBar(),
+                  DevicesWidget(),
                   //isRoom ? RoomBar() : DeviceBar(),
                 ],
               ),

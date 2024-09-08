@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_home/screens/Home_Screen.dart';
 
@@ -8,16 +9,18 @@ const Radius _radius = Radius.circular(_kRadius);
 class OneCard extends StatefulWidget {
   const OneCard({
     super.key,
-    required this.roomName,
+    required this.roomName_or_devicesName,
     required this.image,
     required this.devicesCount,
     this.isOn = false,
+    this.isDevice = false,
   });
 
-  final String roomName;
+  final String roomName_or_devicesName;
   final String devicesCount;
   final String image;
   final bool isOn;
+  final bool isDevice;
 
   @override
   State<OneCard> createState() => _OneCardState();
@@ -71,10 +74,15 @@ class _OneCardState extends State<OneCard> {
                 topLeft: _radius,
                 topRight: _radius,
               ),
-              child: Image.asset(
-                widget.image,
-                fit: BoxFit.cover,
-              ),
+              child: widget.isDevice
+                  ? SvgPicture.asset(
+                      widget.image,
+                      fit: BoxFit.contain,
+                    )
+                  : Image.asset(
+                      widget.image,
+                      fit: BoxFit.cover,
+                    ),
             ),
           ),
           Padding(
@@ -112,29 +120,45 @@ class _OneCardState extends State<OneCard> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              widget.roomName,
-              style: GoogleFonts.robotoCondensed(
-                fontWeight: FontWeight.w600,
-                fontSize: 22,
-                height: 1.3,
-                color: const Color(0x993C3C43),
-              ),
-            ),
             const SizedBox(height: 5),
-            Text(
-              widget.devicesCount,
-              style: GoogleFonts.robotoCondensed(
-                fontWeight: FontWeight.w400,
-                fontSize: 13,
-                height: 1.2,
-                color: const Color(0x993C3C43),
-              ),
-            ),
+            widget.isDevice
+                ? Center(
+                    child: titel(),
+                  )
+                : titel(),
+            widget.isDevice
+                ? Center(
+                    child: devicesCount_widget(),
+                  )
+                : devicesCount_widget(),
             const SizedBox(height: 10),
             _buildToggleRow(),
           ],
         ),
+      ),
+    );
+  }
+
+  Text devicesCount_widget() {
+    return Text(
+      widget.devicesCount,
+      style: GoogleFonts.robotoCondensed(
+        fontWeight: FontWeight.w400,
+        fontSize: 13,
+        height: 1.2,
+        color: const Color(0x993C3C43),
+      ),
+    );
+  }
+
+  Text titel() {
+    return Text(
+      widget.roomName_or_devicesName,
+      style: GoogleFonts.robotoCondensed(
+        fontWeight: FontWeight.w600,
+        fontSize: 22,
+        height: 1.3,
+        color: const Color(0x993C3C43),
       ),
     );
   }
