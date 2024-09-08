@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_home/controllers/custom_controller.dart';
 import 'package:smart_home/screens/Room&devices/one%20card.dart';
 
 class DevicesWidget extends StatefulWidget {
@@ -9,6 +10,7 @@ class DevicesWidget extends StatefulWidget {
 }
 
 class _DevicesWidgetState extends State<DevicesWidget> {
+  
   @override
   Widget build(BuildContext context) {
     return const Padding(
@@ -20,23 +22,23 @@ class _DevicesWidgetState extends State<DevicesWidget> {
             isDevice: true,
             roomName_or_devicesName: 'Heater',
             devicesCount: '4 devices',
-            image: 'assets/vectors/heater.svg',
+            image: 'assets/images/heater.png',
           ),
           OneCard(
               isDevice: true,
               roomName_or_devicesName: 'Lights',
               devicesCount: '8 devices',
-              image: 'assets/vectors/lights.svg'),
+              image: 'assets/images/light.png'),
           OneCard(
               isDevice: true,
               roomName_or_devicesName: 'Geyser',
               devicesCount: '2 devices',
-              image: 'assets/vectors/geyser.svg'),
+              image: 'assets/images/geyser.png'),
           OneCard(
               isDevice: true,
               roomName_or_devicesName: 'TV',
               devicesCount: '1 device',
-              image: 'assets/vectors/tv.svg'),
+              image: 'assets/images/tv.png'),
         ],
       ),
     );

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_home/screens/Home_Screen.dart';
+import 'package:smart_home/controllers/custom_controller.dart';
 
 class RoomOrDevicesBar extends StatefulWidget {
-  const RoomOrDevicesBar({super.key});
-
+  const RoomOrDevicesBar({super.key, required this.customController});
+  final CustomController customController;
   @override
   State<RoomOrDevicesBar> createState() => _RoomOrDevicesBarState();
 }
@@ -17,7 +18,8 @@ class _RoomOrDevicesBarState extends State<RoomOrDevicesBar> {
       child: InkWell(
         onTap: () {
           setState(() {
-            isRoom = !isRoom;
+            // customController.isRoom = !customController.isRoom;
+            widget.customController.changeIsRoom();
           });
         },
         child: Container(
@@ -52,7 +54,9 @@ class _RoomOrDevicesBarState extends State<RoomOrDevicesBar> {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 500),
       curve: Curves.easeInOut,
-      alignment: isRoom ? Alignment.centerLeft : Alignment.centerRight,
+      alignment: widget.customController.isRoom
+          ? Alignment.centerLeft
+          : Alignment.centerRight,
       child: Padding(
         padding: const EdgeInsets.all(3.0),
         child: Container(
@@ -95,7 +99,8 @@ class _RoomOrDevicesBarState extends State<RoomOrDevicesBar> {
             fontSize: 13,
             height: 1.4,
             letterSpacing: -0.1,
-            color: (isRoom && isRoomButton) || (!isRoom && !isRoomButton)
+            color: (widget.customController.isRoom && isRoomButton) ||
+                    (!widget.customController.isRoom && !isRoomButton)
                 ? const Color(0xFF000000)
                 : const Color(0xFF808080),
           ),

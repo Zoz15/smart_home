@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:smart_home/screens/Room&devices/one%20card.dart';
 
-class RoomBar extends StatefulWidget {
-  const RoomBar({super.key});
+class RoomWidget extends StatefulWidget {
+  const RoomWidget({super.key});
 
   @override
-  State<RoomBar> createState() => _RoomBarState();
+  State<RoomWidget> createState() => _RoomWidgetState();
 }
 
-class _RoomBarState extends State<RoomBar> {
+class _RoomWidgetState extends State<RoomWidget> {
   @override
   Widget build(BuildContext context) {
     return const Padding(

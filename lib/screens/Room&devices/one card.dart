@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_home/screens/Home_Screen.dart';
 
@@ -75,9 +74,33 @@ class _OneCardState extends State<OneCard> {
                 topRight: _radius,
               ),
               child: widget.isDevice
-                  ? SvgPicture.asset(
-                      widget.image,
-                      fit: BoxFit.contain,
+                  ? AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 300),
+                      transitionBuilder:
+                          (Widget child, Animation<double> animation) {
+                        return FadeTransition(
+                          opacity: animation,
+                          child: child,
+                        );
+                      },
+                      child: _isOn
+                          ? ShaderMask(
+                              blendMode: BlendMode.srcIn,
+                              shaderCallback: (Rect bounds) =>
+                                  const LinearGradient(
+                                begin: Alignment.centerLeft,
+                                end: Alignment.centerRight,
+                                colors: [Color(0xff5dabf5), Color(0xFFA480CF)],
+                              ).createShader(bounds),
+                              child: Image.asset(
+                                widget.image,
+                                fit: BoxFit.contain,
+                              ),
+                            )
+                          : Image.asset(
+                              widget.image,
+                              fit: BoxFit.contain,
+                            ),
                     )
                   : Image.asset(
                       widget.image,

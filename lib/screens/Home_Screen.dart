@@ -4,25 +4,35 @@ import 'package:smart_home/component/microphone.dart';
 import 'package:smart_home/component/top%20navigation%20bar.dart';
 import 'package:smart_home/component/my%20location.dart';
 import 'package:smart_home/component/room%20or%20devices%20bar.dart';
+import 'package:smart_home/controllers/custom_controller.dart';
 import 'package:smart_home/screens/Room&devices/Devices_Widget.dart';
+import 'package:smart_home/screens/Room&devices/Room_Widget.dart';
 
 double width = 0;
 double height = 0;
-bool isRoom = true;
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
-
+  HomeScreen({super.key});
+  final CustomController _customController = CustomController();
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    widget._customController.addListener(() {
+      setState(() {});
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     height = MediaQuery.of(context).size.height;
     width = MediaQuery.of(context).size.width;
-    return const Scaffold(
+    return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Stack(
@@ -32,12 +42,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   SizedBox(height: 130),
                   MyLocation(),
-                  RoomOrDevicesBar(),
+                  RoomOrDevicesBar(customController: widget._customController),
                   //Card1(),
                   //Card1()
                   // RoomBar(),
-                  DevicesWidget(),
-                  //isRoom ? RoomBar() : DeviceBar(),
+                  AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 300),
+                    child: widget._customController.isRoom
+                        ? RoomWidget()
+                        : DevicesWidget(),
+                  ),
                 ],
               ),
             ),
@@ -45,9 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Align(
                 alignment: Alignment.bottomCenter,
                 child: MyBottomNavigationBar()),
-            Align(
-                alignment: Alignment.bottomCenter,
-                child: Microphone()),
+            Align(alignment: Alignment.bottomCenter, child: Microphone()),
           ],
         ),
       ),
