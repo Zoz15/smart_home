@@ -1,31 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:smart_home/component/bootom%20Navigation%20Bar.dart';
+import 'package:smart_home/component/top_and_bottom_bar/bootom%20Navigation%20Bar.dart';
 import 'package:smart_home/component/microphone.dart';
-import 'package:smart_home/component/top%20navigation%20bar.dart';
+import 'package:smart_home/component/top_and_bottom_bar/top%20navigation%20bar.dart';
 import 'package:smart_home/component/location_and_tem.dart';
 import 'package:smart_home/component/room%20or%20devices%20bar.dart';
-import 'package:smart_home/controllers/custom_controller.dart';
-import 'package:smart_home/screens/Room&devices/Devices_Widget.dart';
-import 'package:smart_home/screens/Room&devices/Room_Widget.dart';
+import 'package:smart_home/controllers/room_and_devise_controller.dart';
+import 'package:smart_home/component/Room&devices/Devices_Widget.dart';
+import 'package:smart_home/component/Room&devices/Room_Widget.dart';
 
 double width = 0;
 double height = 0;
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
-  final CustomController _customController = CustomController();
+  final RoomAndDeviseController _customController = RoomAndDeviseController();
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
-
   void dispose() {
     // TODO: implement dispose
     super.dispose();
     widget._customController.dispose();
   }
+
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -46,8 +47,8 @@ class _HomeScreenState extends State<HomeScreen> {
             SingleChildScrollView(
               child: Column(
                 children: [
-                  SizedBox(height: 130),
-                  MyLocation(),
+                  const SizedBox(height: 130),
+                  const MyLocation(),
                   RoomOrDevicesBar(customController: widget._customController),
                   //Card1(),
                   //Card1()
@@ -55,17 +56,18 @@ class _HomeScreenState extends State<HomeScreen> {
                   AnimatedSwitcher(
                     duration: const Duration(milliseconds: 300),
                     child: widget._customController.isRoom
-                        ? RoomWidget()
-                        : DevicesWidget(),
+                        ? const RoomWidget()
+                        : const DevicesWidget(),
                   ),
                 ],
               ),
             ),
-            Align(alignment: Alignment.topCenter, child: TopNavigationBar()),
-            Align(
+            const Align(
+                alignment: Alignment.topCenter, child: TopNavigationBar()),
+            const Align(
                 alignment: Alignment.bottomCenter,
                 child: MyBottomNavigationBar()),
-            Align(alignment: Alignment.bottomCenter, child: Microphone()),
+            const Align(alignment: Alignment.bottomCenter, child: Microphone()),
           ],
         ),
       ),

@@ -43,7 +43,7 @@ class _TopNavigationBarState extends State<TopNavigationBar> {
                         ),
                       ),
                     ),
-                    _buildSettingIcon(),
+                    const BuildSettingIcon(),
                   ],
                 ),
                 const SizedBox(height: 20),
@@ -96,8 +96,15 @@ class _TopNavigationBarState extends State<TopNavigationBar> {
       ),
     );
   }
+}
 
-  Widget _buildSettingIcon() {
+class BuildSettingIcon extends StatelessWidget {
+  const BuildSettingIcon({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     bool isReversed = false;
     return StatefulBuilder(
       builder: (BuildContext context, StateSetter setState) {

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_home/screens/Home_Screen.dart';
-import 'package:smart_home/controllers/custom_controller.dart';
+import 'package:smart_home/controllers/room_and_devise_controller.dart';
 
 class RoomOrDevicesBar extends StatefulWidget {
   const RoomOrDevicesBar({super.key, required this.customController});
-  final CustomController customController;
+  final RoomAndDeviseController customController;
   @override
   State<RoomOrDevicesBar> createState() => _RoomOrDevicesBarState();
 }

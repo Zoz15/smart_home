@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smart_home/screens/Home_Screen.dart';
+import 'package:smart_home/screens/thermostat.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,9 +11,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: Thermostat(),
     );
   }
 }

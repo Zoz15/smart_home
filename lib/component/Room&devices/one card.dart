@@ -214,7 +214,7 @@ class _OneCardState extends State<OneCard> {
               fontSize: 22,
               height: 1.3,
               letterSpacing: 0.3,
-              color: !_isOn ? Colors.grey.shade400 : Color(0x993C3C43),
+              color: !_isOn ? Colors.grey.shade400 : const Color(0x993C3C43),
             ),
           ),
         ),

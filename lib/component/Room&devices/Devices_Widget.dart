@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smart_home/screens/Room&devices/one%20card.dart';
+import 'package:smart_home/component/Room&devices/one%20card.dart';
 
 class DevicesWidget extends StatefulWidget {
   const DevicesWidget({super.key});

@@ -31,10 +31,10 @@ class MyLocation extends StatelessWidget {
     return BoxDecoration(
       borderRadius: BorderRadius.circular(22),
       gradient: LinearGradient(
-        begin: Alignment(-1.046, -1),
-        end: Alignment(1.067, 1.104),
+        begin: const Alignment(-1.046, -1),
+        end: const Alignment(1.067, 1.104),
         colors: [mainColor1, mainColor2],
-        stops: [0, 1],
+        stops: const [0, 1],
       ),
     );
   }
