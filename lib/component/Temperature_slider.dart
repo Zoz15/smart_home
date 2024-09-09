@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:smart_home/component/my_circle_widget.dart';
 
 class TemperatureSlider extends StatefulWidget {
   const TemperatureSlider({super.key});
@@ -13,14 +15,19 @@ class TemperatureSlider extends StatefulWidget {
 class _TemperatureSliderState extends State<TemperatureSlider> {
   double _rotationValue = 0;
   Offset? _lastPosition;
+  double get temperature =>
+      10 + (_rotationValue / 180) * 20; // 10 to 30 degrees
+
+  double get progressValue {
+    return (temperature - 10) / 20 * 0.5 + 0.5;
+  }
 
   void _onPanStart(DragStartDetails details) {
     _lastPosition = details.localPosition;
   }
 
   void _onPanUpdate(DragUpdateDetails details) {
-    final center =
-        Offset(100, 100); // center of the circle
+    final center = Offset(100, 100); // center of the circle
     final currentPosition = details.localPosition;
 
     if (_lastPosition != null) {
@@ -29,7 +36,7 @@ class _TemperatureSliderState extends State<TemperatureSlider> {
       final angle2 =
           atan2(currentPosition.dy - center.dy, currentPosition.dx - center.dx);
 
-      // calculate 
+      // calculate
       double angleDelta = angle2 - angle1;
 
       //range of -pi to pi
@@ -42,7 +49,7 @@ class _TemperatureSliderState extends State<TemperatureSlider> {
       setState(() {
         _rotationValue += angleDelta * 180 / pi;
 
-        //  between 0 and 180 
+        //  between 0 and 180
         if (_rotationValue < 0) {
           _rotationValue = 0;
         } else if (_rotationValue > 180) {
@@ -64,6 +71,7 @@ class _TemperatureSliderState extends State<TemperatureSlider> {
           _buildFirstContainer(),
           _buildSvgMoneySlider(),
           _buildShadow(),
+          _buildCircularProgress(),
           _buildSecondContainer(),
           _buildCenterContainer(),
           _buildRotatingKnob(),
@@ -144,6 +152,53 @@ class _TemperatureSliderState extends State<TemperatureSlider> {
             end: Alignment.bottomRight,
           ),
         ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(height: 30),
+            Text(
+              'HEATING',
+              style: GoogleFonts.getFont(
+                'Roboto Condensed',
+                fontWeight: FontWeight.w600,
+                fontSize: 17,
+                height: 1.3,
+                letterSpacing: -0.4,
+                color: Color(0x993C3C43),
+              ),
+            ),
+            SizedBox(height: 15),
+            Text(
+              '${temperature.toInt()}°',
+              style: GoogleFonts.getFont(
+                'Roboto Condensed',
+                fontWeight: FontWeight.w400,
+                fontSize: 54,
+                height: 0.6,
+                letterSpacing: 0.3,
+                color: Color(0x2E3C3C43),
+              ),
+            ),
+            SizedBox(height: 40),
+            AnimatedCrossFade(
+              duration: const Duration(milliseconds: 300),
+              firstChild: SvgPicture.asset(
+                'assets/vectors/tree_paper.svg',
+                width: 20,
+                fit: BoxFit.contain,
+              ),
+              secondChild: SvgPicture.asset(
+                'assets/vectors/tree_paper_gray.svg',
+                width: 20,
+                fit: BoxFit.contain,
+              ),
+              crossFadeState: temperature < 21
+                  ? CrossFadeState.showFirst
+                  : CrossFadeState.showSecond,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -155,17 +210,21 @@ class _TemperatureSliderState extends State<TemperatureSlider> {
         onPanStart: _onPanStart,
         child: Transform.rotate(
           angle: _rotationValue * 0.0174533,
-          child: SizedBox(
-            height: 170,
-            width: 170,
+          child: Container(
+            height: 160,
+            width: 160,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              // border: Border.all(color: Colors.black26.withOpacity(0.5)),
+            ),
             child: Align(
               alignment: Alignment.centerLeft,
               child: Container(
-                height: 30,
-                width: 30,
+                height: 15,
+                width: 15,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  border: Border.all(color: Colors.black26.withOpacity(0.5)),
+                  //border: Border.all(color: Colors.black26.withOpacity(0.1)),
                   gradient: const LinearGradient(
                     colors: [Colors.white, Color(0xFFD8DEE9)],
                     begin: Alignment.topLeft,
@@ -173,6 +232,28 @@ class _TemperatureSliderState extends State<TemperatureSlider> {
                   ),
                 ),
               ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  _buildCircularProgress() {
+    return Center(
+      child: RotatedBox(
+        quarterTurns: 1,
+        child: SizedBox(
+          height: 225,
+          width: 225,
+          child: CustomPaint(
+            painter: MyCirularWidget(
+              progress: progressValue,
+              strokeWidth: 15,
+              gradientColors: [
+                Color(0xff9c5edb),
+                Color(0xffcc5890),
+              ],
             ),
           ),
         ),
