@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:smart_home/component/my_circle_widget.dart';
+import 'package:smart_home/component/MyWidgets/my_circle_widget.dart';
 
 class TemperatureSlider extends StatefulWidget {
   const TemperatureSlider({super.key});
@@ -160,7 +160,7 @@ class _TemperatureSliderState extends State<TemperatureSlider> {
             Text(
               'HEATING',
               style: GoogleFonts.getFont(
-                'Roboto Condensed',
+                'Roboto',
                 fontWeight: FontWeight.w600,
                 fontSize: 17,
                 height: 1.3,
@@ -172,7 +172,7 @@ class _TemperatureSliderState extends State<TemperatureSlider> {
             Text(
               '${temperature.toInt()}°',
               style: GoogleFonts.getFont(
-                'Roboto Condensed',
+                'Roboto',
                 fontWeight: FontWeight.w400,
                 fontSize: 54,
                 height: 0.6,
