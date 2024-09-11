@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smart_home/component/Room&devices/one%20card.dart';
+import 'package:smart_home/screens/slider_screen_num2.dart';
 
 class DevicesWidget extends StatefulWidget {
   const DevicesWidget({super.key});
@@ -9,10 +10,9 @@ class DevicesWidget extends StatefulWidget {
 }
 
 class _DevicesWidgetState extends State<DevicesWidget> {
-  
   @override
   Widget build(BuildContext context) {
-    return const Padding(
+    return Padding(
       padding: EdgeInsets.only(bottom: 120),
       child: Wrap(
         children: [
@@ -22,6 +22,12 @@ class _DevicesWidgetState extends State<DevicesWidget> {
             roomName_or_devicesName: 'Heater',
             devicesCount: '4 devices',
             image: 'assets/images/heater.png',
+            ontap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const Slider_screen_num2()));
+            },
           ),
           OneCard(
               isDevice: true,

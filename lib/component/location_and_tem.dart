@@ -30,11 +30,11 @@ class MyLocation extends StatelessWidget {
   BoxDecoration _buildContainerDecoration() {
     return BoxDecoration(
       borderRadius: BorderRadius.circular(22),
-      gradient: LinearGradient(
-        begin: const Alignment(-1.046, -1),
-        end: const Alignment(1.067, 1.104),
+      gradient: const LinearGradient(
+        begin: Alignment(-1.046, -1),
+        end: Alignment(1.067, 1.104),
         colors: [mainColor1, mainColor2],
-        stops: const [0, 1],
+        stops: [0, 1],
       ),
     );
   }
@@ -80,7 +80,7 @@ class MyLocation extends StatelessWidget {
       {Color color = Colors.white, double? height}) {
     return Text(
       text,
-      style: GoogleFonts.robotoCondensed(
+      style: GoogleFonts.roboto(
         fontWeight: fontWeight,
         fontSize: fontSize,
         color: color,

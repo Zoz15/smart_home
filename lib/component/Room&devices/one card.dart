@@ -9,21 +9,22 @@ const double _kRadius = 25;
 const Radius _radius = Radius.circular(_kRadius);
 
 class OneCard extends StatefulWidget {
-  const OneCard({
+  OneCard({
     super.key,
     required this.roomName_or_devicesName,
     required this.image,
     required this.devicesCount,
     this.isOn = false,
     this.isDevice = false,
+    this.ontap,
   });
 
   final String roomName_or_devicesName;
   final String devicesCount;
+  final Function()? ontap;
   final String image;
   final bool isOn;
   final bool isDevice;
-
   @override
   State<OneCard> createState() => _OneCardState();
 }
@@ -41,25 +42,28 @@ class _OneCardState extends State<OneCard> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
-      child: Container(
-        height: 240,
-        width: (width - 60) / 2,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(_kRadius),
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.3),
-              offset: const Offset(0, 2),
-              blurRadius: 10,
-            ),
-          ],
-        ),
-        child: Column(
-          children: [
-            _buildImageSection(),
-            _buildInfoSection(),
-          ],
+      child: InkWell(
+        onTap: widget.ontap,
+        child: Container(
+          height: 240,
+          width: (width - 60) / 2,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(_kRadius),
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.3),
+                offset: const Offset(0, 2),
+                blurRadius: 10,
+              ),
+            ],
+          ),
+          child: Column(
+            children: [
+              _buildImageSection(),
+              _buildInfoSection(),
+            ],
+          ),
         ),
       ),
     );
@@ -89,7 +93,8 @@ class _OneCardState extends State<OneCard> {
                       child: _isOn
                           ? ShaderMask(
                               blendMode: BlendMode.srcIn,
-                              shaderCallback: (Rect bounds) => LinearGradient(
+                              shaderCallback: (Rect bounds) =>
+                                  const LinearGradient(
                                 begin: Alignment.centerLeft,
                                 end: Alignment.centerRight,
                                 colors: [mainColor1, mainColor2],
@@ -172,7 +177,7 @@ class _OneCardState extends State<OneCard> {
   Text devicesCount_widget() {
     return Text(
       widget.devicesCount,
-      style: GoogleFonts.robotoCondensed(
+      style: GoogleFonts.roboto(
         fontWeight: FontWeight.w400,
         fontSize: 13,
         height: 1.2,
@@ -184,9 +189,11 @@ class _OneCardState extends State<OneCard> {
   Text titel() {
     return Text(
       widget.roomName_or_devicesName,
-      style: GoogleFonts.robotoCondensed(
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
+      style: GoogleFonts.roboto(
         fontWeight: FontWeight.w600,
-        fontSize: 22,
+        fontSize: 20,
         height: 1.3,
         color: const Color(0x993C3C43),
       ),
@@ -209,7 +216,7 @@ class _OneCardState extends State<OneCard> {
           child: Text(
             _isOn ? 'ON  ' : 'OFF',
             key: ValueKey<bool>(_isOn),
-            style: GoogleFonts.robotoCondensed(
+            style: GoogleFonts.roboto(
               fontWeight: FontWeight.w400,
               fontSize: 22,
               height: 1.3,

@@ -1,41 +1,41 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_home/component/MyWidgets/my_curved_drop_down.dart';
-import 'package:smart_home/component/Temperature_slider.dart';
-import 'package:smart_home/component/info_card.dart';
+import 'package:smart_home/component/temperatures%20slider/Temperature_slider.dart';
+import 'package:smart_home/component/temperatures%20slider/info_card_style1.dart';
+import 'package:smart_home/component/temperatures%20slider/build_control_buttons.dart';
 import 'package:smart_home/component/top_and_bottom_bar/top%20navigation%20bar.dart';
 
-class Thermostat extends StatefulWidget {
-  const Thermostat({super.key});
+class Slider_screen_num1 extends StatefulWidget {
+  const Slider_screen_num1({super.key});
 
   @override
-  State<Thermostat> createState() => _ThermostatState();
+  State<Slider_screen_num1> createState() => _Slider_screen_num1State();
 }
 
-class _ThermostatState extends State<Thermostat> {
+class _Slider_screen_num1State extends State<Slider_screen_num1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        color: const Color(0xffeef1f4),
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 20, 20, 8),
-          child: SingleChildScrollView(
+      body: SafeArea(
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          color: const Color(0xffeef1f4),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(20, 20, 20, 8),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 _buildHeader(),
-                const SizedBox(height: 28),
+                const SizedBox(height: 20),
                 _buildTemperatureControl(),
-                const SizedBox(height: 45),
+                const SizedBox(height: 30),
                 _buildDeviceSelector(),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 _buildInfoCards(),
-                SizedBox(height: 28),
+                const SizedBox(height: 20),
                 _buildControlButtons(),
                 // SizedBox(height: 18),
                 // _buildBottomIndicator(),
@@ -80,7 +80,7 @@ class _ThermostatState extends State<Thermostat> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          textTemperatureControl('20°'),
+          textTemperatureControl(' 20°'),
           const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -131,12 +131,12 @@ class _ThermostatState extends State<Thermostat> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          InfoCard(
+          InfoCardStyle1(
               title: 'inside humidity',
               value: ' 49%',
               image: 'assets/vectors/info_card_1.svg'),
           SizedBox(width: 10),
-          InfoCard(
+          InfoCardStyle1(
               title: 'Outside temp',
               value: '10°',
               image: 'assets/vectors/info_card_2.svg'),
@@ -146,111 +146,20 @@ class _ThermostatState extends State<Thermostat> {
   }
 
   _buildControlButtons() {
-    return Row(
+    return const Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        ControlerButtons(
+        BuildSingelControlerButtons(
             image: 'assets/vectors/nem_1_small_button.svg', name: 'MODE'),
         // const SizedBox(width: 10),
-        ControlerButtons(
+        BuildSingelControlerButtons(
             image: 'assets/vectors/nem_2_small_button.svg', name: 'ECO'),
         // const SizedBox(width: 10),
-        ControlerButtons(
+        BuildSingelControlerButtons(
             image: 'assets/vectors/nem_3_small_button.svg', name: 'SCHEDULE'),
         // const SizedBox(width: 10),
-        ControlerButtons(
+        BuildSingelControlerButtons(
             image: 'assets/vectors/nem_4_small_button.svg', name: 'HISTORY'),
-      ],
-    );
-  }
-}
-
-class ControlerButtons extends StatefulWidget {
-  final String image;
-  final bool isTapped;
-  final String name;
-  const ControlerButtons(
-      {super.key,
-      required this.image,
-      this.isTapped = false,
-      required this.name});
-
-  @override
-  State<ControlerButtons> createState() => _ControlerButtonsState();
-}
-
-class _ControlerButtonsState extends State<ControlerButtons> {
-  bool isTapped = false;
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    isTapped = widget.isTapped;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    double size = 70;
-    return Column(
-      children: [
-        InkWell(
-          onTap: () {
-            setState(() {
-              isTapped = !isTapped;
-            });
-          },
-          child: Container(
-            height: size,
-            width: size,
-            child: Stack(
-              children: [
-                AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 300),
-                  child: isTapped
-                      ? SvgPicture.asset(
-                          'assets/vectors/the_small_button_taped.svg',
-                          key: ValueKey('tapped'),
-                          width: size,
-                          height: size,
-                        )
-                      : SvgPicture.asset(
-                          'assets/vectors/the_small_button_nottaped.svg',
-                          key: ValueKey('nottapped'),
-                          width: size,
-                          height: size,
-                        ),
-                ),
-                Center(
-                  child: AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 300),
-                    child: SvgPicture.asset(
-                      widget.image,
-                      key: ValueKey(isTapped),
-                      height: 50,
-                      width: 50,
-                      colorFilter: ColorFilter.mode(
-                        isTapped ? Colors.white : Colors.grey,
-                        BlendMode.srcIn,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        SizedBox(height: 10),
-        Text(
-          widget.name,
-          style: GoogleFonts.getFont(
-            'Roboto',
-            fontWeight: FontWeight.w600,
-            fontSize: 15,
-            color: Color(0xff83858b),
-            // height: 1.3,
-            // letterSpacing: -0.2,
-          ),
-        ),
       ],
     );
   }

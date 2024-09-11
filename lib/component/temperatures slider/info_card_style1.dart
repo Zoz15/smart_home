@@ -1,10 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class InfoCard extends StatelessWidget {
-  const InfoCard(
+class InfoCardStyle1 extends StatelessWidget {
+  const InfoCardStyle1(
       {super.key,
       required this.title,
       required this.value,

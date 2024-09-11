@@ -12,11 +12,11 @@ class RoomOrDevicesBar extends StatefulWidget {
 
 class _RoomOrDevicesBarState extends State<RoomOrDevicesBar> {
   @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    widget.customController.dispose();
-  }
+  // void dispose() {
+  //   // TODO: implement dispose
+  //   super.dispose();
+  //   widget.customController.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -101,7 +101,7 @@ class _RoomOrDevicesBarState extends State<RoomOrDevicesBar> {
       child: Center(
         child: AnimatedDefaultTextStyle(
           duration: const Duration(milliseconds: 300),
-          style: GoogleFonts.robotoCondensed(
+          style: GoogleFonts.roboto(
             fontWeight: FontWeight.w600,
             fontSize: 13,
             height: 1.4,

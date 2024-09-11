@@ -11,8 +11,8 @@ class RoomWidget extends StatefulWidget {
 class _RoomWidgetState extends State<RoomWidget> {
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.only(bottom: 120),
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 120),
       child: Wrap(
         children: [
           //TODO: add the rooms and devices count
@@ -21,15 +21,15 @@ class _RoomWidgetState extends State<RoomWidget> {
             devicesCount: '4 devices',
             image: 'assets/images/image.jpeg',
           ),
-          OneCard(
+           OneCard(
               roomName_or_devicesName: 'Living Room',
               devicesCount: '8 devices',
               image: 'assets/images/image_3.jpeg'),
-          OneCard(
+           OneCard(
               roomName_or_devicesName: 'Kitchen',
               devicesCount: '5 devices',
               image: 'assets/images/image_4.jpeg'),
-          OneCard(
+           OneCard(
               roomName_or_devicesName: 'Bathroom',
               devicesCount: '2 devices',
               image: 'assets/images/image_1.jpeg'),

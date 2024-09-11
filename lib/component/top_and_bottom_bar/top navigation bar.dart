@@ -35,7 +35,7 @@ class _TopNavigationBarState extends State<TopNavigationBar> {
                       margin: const EdgeInsets.symmetric(vertical: 1.5),
                       child: Text(
                         'Home',
-                        style: GoogleFonts.robotoCondensed(
+                        style: GoogleFonts.roboto(
                           fontWeight: FontWeight.w600,
                           fontSize: 28,
                           letterSpacing: 0.4,
@@ -53,7 +53,7 @@ class _TopNavigationBarState extends State<TopNavigationBar> {
                   children: [
                     Text(
                       'Family Members',
-                      style: GoogleFonts.robotoCondensed(
+                      style: GoogleFonts.roboto(
                         fontWeight: FontWeight.w600,
                         fontSize: 20,
                         height: 1.2,
