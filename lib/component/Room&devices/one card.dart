@@ -9,7 +9,7 @@ const double _kRadius = 25;
 const Radius _radius = Radius.circular(_kRadius);
 
 class OneCard extends StatefulWidget {
-  OneCard({
+  const OneCard({
     super.key,
     required this.roomName_or_devicesName,
     required this.image,

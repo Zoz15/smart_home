@@ -1,7 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:smart_home/component/temperatures%20slider/info_card_style1.dart';
 import 'package:smart_home/component/temperatures%20slider/build_control_buttons.dart';
 import 'package:smart_home/component/temperatures%20slider/info_card_style2.dart';
 import 'package:smart_home/component/top_and_bottom_bar/top%20navigation%20bar.dart';
@@ -34,7 +33,7 @@ class _Slider_screen_num2State extends State<Slider_screen_num2> {
                 _buildTemperatureControl(),
                 const SizedBox(height: 30),
                 _buildInfoCards(),
-                Spacer(),
+                const Spacer(),
                 _buildControlButtons(),
                 // SizedBox(height: 18),
                 // _buildBottomIndicator(),
@@ -96,7 +95,7 @@ class _Slider_screen_num2State extends State<Slider_screen_num2> {
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withOpacity(.2),
-                  offset: Offset(0, 30),
+                  offset: const Offset(0, 30),
                   blurRadius: 30,
                   spreadRadius: 10,
                 ),
@@ -112,7 +111,7 @@ class _Slider_screen_num2State extends State<Slider_screen_num2> {
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withOpacity(.2),
-                  offset: Offset(0, 30),
+                  offset: const Offset(0, 30),
                   blurRadius: 30,
                   spreadRadius: 10,
                 ),
@@ -134,7 +133,7 @@ class _Slider_screen_num2State extends State<Slider_screen_num2> {
             decoration: const BoxDecoration(
               shape: BoxShape.circle,
               //border: Border.all(color: Colors.black),
-              gradient: const LinearGradient(
+              gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
@@ -159,7 +158,7 @@ class _Slider_screen_num2State extends State<Slider_screen_num2> {
       child: Container(
         //height: 130,
         width: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.symmetric(horizontal: 25, vertical: 30),
+        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 30),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
@@ -171,7 +170,7 @@ class _Slider_screen_num2State extends State<Slider_screen_num2> {
             ),
           ],
         ),
-        child: Column(
+        child: const Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             InfoCardStyle2(

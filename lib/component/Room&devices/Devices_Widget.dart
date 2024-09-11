@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smart_home/component/Room&devices/one%20card.dart';
-import 'package:smart_home/screens/slider_screen_num2.dart';
+import 'package:smart_home/screens/slider%20screen/slider_screen_num2.dart';
 
 class DevicesWidget extends StatefulWidget {
   const DevicesWidget({super.key});
@@ -13,7 +13,7 @@ class _DevicesWidgetState extends State<DevicesWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 120),
+      padding: const EdgeInsets.only(bottom: 120),
       child: Wrap(
         children: [
           //TODO: add the rooms and devices count

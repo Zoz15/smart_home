@@ -27,7 +27,7 @@ class _TemperatureSliderState extends State<TemperatureSlider> {
   }
 
   void _onPanUpdate(DragUpdateDetails details) {
-    final center = const Offset(100, 100); // center of the circle
+    const center = Offset(100, 100); // center of the circle
     final currentPosition = details.localPosition;
 
     if (_lastPosition != null) {
@@ -129,7 +129,7 @@ class _TemperatureSliderState extends State<TemperatureSlider> {
         width: 200,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          gradient: LinearGradient(
+          gradient: const LinearGradient(
             colors: [Colors.white, Color(0xFFD8DEE9)],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,

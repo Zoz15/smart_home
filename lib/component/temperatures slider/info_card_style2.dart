@@ -40,7 +40,7 @@ class InfoCardStyle2 extends StatelessWidget {
             ),
           ),
           // const SizedBox(width: 10),
-          Spacer(),
+          const Spacer(),
           Text(
             value,
             style: GoogleFonts.getFont(

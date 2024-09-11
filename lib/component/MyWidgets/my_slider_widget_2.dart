@@ -5,6 +5,8 @@ import 'dart:math';
 import 'package:google_fonts/google_fonts.dart';
 
 class My_slider_widget_2 extends StatefulWidget {
+  const My_slider_widget_2({super.key});
+
   @override
   _My_slider_widget_2State createState() => _My_slider_widget_2State();
 }
@@ -28,7 +30,7 @@ class _My_slider_widget_2State extends State<My_slider_widget_2> {
           _center = Offset(constraints.maxWidth / 2, constraints.maxHeight / 2);
 
           return CustomPaint(
-            size: Size(200, 200),
+            size: const Size(200, 200),
             painter: CircularSliderPainter(
                 currentValue: _currentValue,
                 minValue: _minValue,
