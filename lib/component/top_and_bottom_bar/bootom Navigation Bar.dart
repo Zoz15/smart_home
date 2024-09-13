@@ -23,7 +23,7 @@ class MyBottomNavigationBar extends StatelessWidget {
     return ClipRect(
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-        child: Container(
+        child: SizedBox(
           height: 90,
           width: MediaQuery.of(context).size.width,
           child: Stack(

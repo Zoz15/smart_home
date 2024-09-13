@@ -146,7 +146,7 @@ class _Slider_screen_num2State extends State<Slider_screen_num2> {
           SizedBox(
               height: MediaQuery.of(context).size.width - 140,
               width: MediaQuery.of(context).size.width - 140,
-              child: My_slider_widget_2()),
+              child: const My_slider_widget_2()),
         ],
       ),
     );

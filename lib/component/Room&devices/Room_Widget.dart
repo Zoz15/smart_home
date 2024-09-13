@@ -11,8 +11,8 @@ class RoomWidget extends StatefulWidget {
 class _RoomWidgetState extends State<RoomWidget> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 120),
+    return const Padding(
+      padding: EdgeInsets.only(bottom: 120),
       child: Wrap(
         children: [
           //TODO: add the rooms and devices count

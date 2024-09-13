@@ -10,11 +10,9 @@ import 'package:smart_home/component/Room&devices/Room_Widget.dart';
 import 'package:smart_home/screens/log%20in%20&%20sign%20up/login_or_signup.dart';
 import 'package:smart_home/var/var.dart';
 
-double width = 0;
-double height = 0;
-
 class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
+
   final RoomAndDeviseController _customController = RoomAndDeviseController();
   final HomeScreen_or_accScreen _customController2 = HomeScreen_or_accScreen();
   @override
@@ -42,47 +40,44 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    height = MediaQuery.of(context).size.height;
     width = MediaQuery.of(context).size.width;
+    height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: whiteColor,
       body: SafeArea(
-        child: Stack(
-          children: [
-            AnimatedSwitcher(
-              duration: const Duration(milliseconds: 400),
-              child: widget._customController2.isAccScreen
-                  ? const LoginOrSignup()
-                  : Stack(
-                      children: [
-                        SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              const SizedBox(height: 130),
-                              const MyLocation(),
-                              RoomOrDevicesBar(
-                                  customController: widget._customController),
-                              AnimatedSwitcher(
-                                duration: const Duration(milliseconds: 300),
-                                child: widget._customController.isRoom
-                                    ? const RoomWidget()
-                                    : const DevicesWidget(),
-                              ),
-                            ],
+        child: AnimatedSwitcher(
+          duration: const Duration(milliseconds: 400),
+          child: widget._customController2.isAccScreen
+              ? const LoginOrSignup()
+              : Stack(
+                  children: [
+                    SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          const SizedBox(height: 130),
+                          const MyLocation(),
+                          RoomOrDevicesBar(
+                              customController: widget._customController),
+                          AnimatedSwitcher(
+                            duration: const Duration(milliseconds: 300),
+                            child: widget._customController.isRoom
+                                ? const RoomWidget()
+                                : const DevicesWidget(),
                           ),
-                        ),
-                        const Align(
-                            alignment: Alignment.topCenter,
-                            child: TopNavigationBar()),
-                      ],
+                          Align(
+                            alignment: Alignment.bottomCenter,
+                            child: MyBottomNavigationBar(
+                                customController:
+                                    widget._customController2),
+                          ),
+                        ],
+                      ),
                     ),
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: MyBottomNavigationBar(
-                  customController: widget._customController2),
-            ),
-          ],
+                    const Align(
+                        alignment: Alignment.topCenter,
+                        child: TopNavigationBar()),
+                  ],
+                ),
         ),
       ),
     );

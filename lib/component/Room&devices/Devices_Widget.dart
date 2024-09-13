@@ -29,17 +29,17 @@ class _DevicesWidgetState extends State<DevicesWidget> {
                       builder: (context) => const Slider_screen_num2()));
             },
           ),
-          OneCard(
+          const OneCard(
               isDevice: true,
               roomName_or_devicesName: 'Lights',
               devicesCount: '8 devices',
               image: 'assets/images/light.png'),
-          OneCard(
+          const OneCard(
               isDevice: true,
               roomName_or_devicesName: 'Geyser',
               devicesCount: '2 devices',
               image: 'assets/images/geyser.png'),
-          OneCard(
+          const OneCard(
               isDevice: true,
               roomName_or_devicesName: 'TV',
               devicesCount: '1 device',

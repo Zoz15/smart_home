@@ -1,10 +1,8 @@
 import 'dart:ui';
-
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:smart_home/screens/Home_Screen.dart';
-import 'package:smart_home/screens/log%20in%20&%20sign%20up/background_animathion.dart';
+import 'package:smart_home/screens/log%20in%20&%20sign%20up/background_animathion_test.dart';
 import 'package:smart_home/var/var.dart';
 
 class LoginOrSignup extends StatefulWidget {
@@ -14,38 +12,45 @@ class LoginOrSignup extends StatefulWidget {
   State<LoginOrSignup> createState() => _LoginOrSignupState();
 }
 
-class _LoginOrSignupState extends State<LoginOrSignup> {
+class _LoginOrSignupState extends State<LoginOrSignup> with SingleTickerProviderStateMixin {
   bool isEmailValid = false;
   String email = '';
+  String ownerEmail = '';
+  String username = '';
   String password = '';
+  bool emptyFields = false;
+  bool isOwner = true;
 
-  bool emptyEmailOrPassword = false;
+  late AnimationController _controller;
+  late Animation<double> _animation;
 
-  bool goto2screen = false;
-  bool endanim = false;
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 300),
+      vsync: this,
+    );
+    _animation = CurvedAnimation(
+      parent: _controller,
+      curve: Curves.easeInOut,
+    );
+  }
 
-  double _changHight1 = height - 850;
-  double _changWidth1 = width - 300;
-  //?2
-  double _changHight2 = -140;
-  double _changWidth2 = -25;
-  //
-  double _changHight3 = height - 1260;
-  double _changWidth3 = width - 100;
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
-  final double _sizeofContaner = 550.0;
-
-  void _moveCircles() {
+  void _toggleUserType() {
     setState(() {
-      _changHight1 = _changHight1 == -180.0 ? height - 850 : -180.0;
-      _changWidth1 = _changWidth1 == -180.0 ? width - 300 : -180.0;
-      //?2
-      _changHight2 = _changHight2 == height - 700 ? -140 : height - 700;
-      _changWidth2 = _changWidth2 == width - 100 ? -25 : width - 100;
-      //?3
-      _changHight3 =
-          _changHight3 == height - 1260 ? height - 450 : height - 1260;
-      _changWidth3 = _changWidth3 == width - 100 ? width - 450 : width - 100;
+      isOwner = !isOwner;
+      if (isOwner) {
+        _controller.reverse();
+      } else {
+        _controller.forward();
+      }
     });
   }
 
@@ -53,159 +58,14 @@ class _LoginOrSignupState extends State<LoginOrSignup> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        color: whiteColor,
+        color: Colors.transparent,
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         child: Stack(
           children: [
-            Circle(
-              changWidth1: _changWidth1,
-              changHight1: _changHight1,
-              sizeofContaner: _sizeofContaner,
-            ),
-            Circle(
-              changWidth1: _changWidth2,
-              changHight1: _changHight2,
-              sizeofContaner: 130,
-            ),
-            Circle(
-              changWidth1: _changWidth3,
-              changHight1: _changHight3,
-              sizeofContaner: 170,
-            ),
+            Animathon_background(),
             Center(
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 100),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
-                    child: Container(
-                      padding: const EdgeInsets.all(25),
-                      height: height / 2,
-                      width: width * .75,
-                      decoration: BoxDecoration(
-                        color: mainColor3.withOpacity(.3),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          SizedBox(height: 1),
-                          Text(
-                            'Welcome',
-                            style: GoogleFonts.roboto(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 30,
-                              color: Colors.white,
-                              //height: height,
-                            ),
-                          ),
-                          SizedBox(height: 1),
-                          _bildeTextField(
-                              obscureText: false, hintText: 'Email'),
-                          _bildeTextField(
-                              obscureText: true, hintText: 'Password'),
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: InkWell(
-                              onTap: () {
-                                //TODO: forgot password
-                              },
-                              child: Text(
-                                'Forgot Password?',
-                                style: GoogleFonts.roboto(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 13,
-                                  color: mainColor4,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Column(
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  //TODO: login
-                                  setState(() {
-                                    emptyEmailOrPassword = false;
-                                  });
-                                  if (isEmailValid &&
-                                      password != '' &&
-                                      email != '') {
-                                    _moveCircles();
-                                    print(email);
-                                    print(password);
-                                  } else {
-                                    setState(() {
-                                      emptyEmailOrPassword = true;
-                                    });
-                                  }
-                                },
-                                child: Container(
-                                  //width: width,
-                                  //height: 50,
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 10, horizontal: 25),
-                                  decoration: BoxDecoration(
-                                    color: whiteColor.withOpacity(.3),
-                                    borderRadius: BorderRadius.circular(100),
-                                  ),
-                                  child: Text(
-                                    'Login',
-                                    style: GoogleFonts.roboto(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 16,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              if (emptyEmailOrPassword)
-                                Center(
-                                  child: Text(
-                                    'No email or password',
-                                    style: GoogleFonts.roboto(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 14,
-                                      color: Colors.red,
-                                    ),
-                                  ),
-                                ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Don\'t have an account',
-                                style: GoogleFonts.roboto(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 14,
-                                  color: Colors.white.withOpacity(.7),
-                                ),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  //TODO: signup
-                                },
-                                child: Text(
-                                  '  Signup',
-                                  style: GoogleFonts.roboto(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 14,
-                                    color: mainColor4,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+              child: _buildLoginCard(),
             ),
           ],
         ),
@@ -213,63 +73,321 @@ class _LoginOrSignupState extends State<LoginOrSignup> {
     );
   }
 
-  TextField _bildeTextField(
-      {required bool obscureText, required String hintText}) {
-    return TextField(
-      onSubmitted: (value) {
-        if (hintText == 'Email') {
-          setState(() {
-            isEmailValid = EmailValidator.validate(value);
-          });
-        }
-      },
-      onChanged: (value) {
-        if (hintText == 'Email') {
-          setState(() {
-            email = value;
-            isEmailValid = EmailValidator.validate(value);
-          });
-        } else if (hintText == 'Password') {
-          password = value;
-        }
-      },
-      obscureText: obscureText,
-      style: GoogleFonts.roboto(
-        fontWeight: FontWeight.w500,
-        fontSize: 16,
-        color: Colors.white,
-      ),
-      decoration: InputDecoration(
-        fillColor: Colors.white.withOpacity(.3),
-        filled: true,
-        contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
-        hintText: hintText,
-        hintStyle: GoogleFonts.roboto(
-          fontWeight: FontWeight.w500,
-          fontSize: 16,
-          color: Colors.white,
-        ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(100),
-          borderSide: BorderSide.none,
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(100),
-          borderSide: BorderSide.none,
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(100),
-          borderSide: BorderSide.none,
-        ),
-        errorText: hintText == 'Email' && !isEmailValid && email.isNotEmpty
-            ? 'Invalid email'
-            : null,
-        errorStyle: GoogleFonts.roboto(
-          fontWeight: FontWeight.w500,
-          fontSize: 14,
-          color: Colors.red,
+  Widget _buildLoginCard() {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(20),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+        child: Container(
+          padding: const EdgeInsets.all(25),
+          height: height / 1.8,
+          width: width * .75,
+          decoration: _buildCardDecoration(),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              _buildWelcomeText(),
+              _buildUserTypeToggle(),
+              _buildLoginFields(),
+              _buildForgotPassword(),
+              _buildLoginButton(),
+              _buildSignupPrompt(),
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  BoxDecoration _buildCardDecoration() {
+    return BoxDecoration(
+      color: Colors.white.withOpacity(0.2),
+      borderRadius: BorderRadius.circular(20),
+      border: Border.all(color: Colors.white.withOpacity(0.2)),
+      boxShadow: [
+        BoxShadow(
+          color: mainColor1.withOpacity(0.1),
+          blurRadius: 20,
+          spreadRadius: 5,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildWelcomeText() {
+    return ShaderMask(
+      blendMode: BlendMode.srcIn,
+      shaderCallback: (Rect bounds) {
+        return const LinearGradient(
+          colors: [mainColor1, mainColor2],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ).createShader(bounds);
+      },
+      child: Text(
+        'Welcome',
+        style: GoogleFonts.roboto(
+          fontWeight: FontWeight.w500,
+          fontSize: 30,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildUserTypeToggle() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        _buildToggleButton('Owner', isOwner),
+        const SizedBox(width: 20),
+        _buildToggleButton('User', !isOwner),
+      ],
+    );
+  }
+
+  Widget _buildToggleButton(String text, bool isSelected) {
+    return InkWell(
+      onTap: _toggleUserType,
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+        decoration: BoxDecoration(
+          gradient: isSelected
+              ? const LinearGradient(
+                  colors: [mainColor1, mainColor2],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                )
+              : null,
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(
+            color: isSelected ? Colors.transparent : mainColor1,
+          ),
+        ),
+        child: Text(
+          text,
+          style: GoogleFonts.roboto(
+            fontWeight: FontWeight.w500,
+            fontSize: 14,
+            color: isSelected ? Colors.white : mainColor1,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildLoginFields() {
+    return Column(
+      children: [
+        AnimatedSwitcher(
+          duration: const Duration(milliseconds: 300),
+          child: isOwner
+              ? _buildTextField(obscureText: false, hintText: 'Email')
+              : _buildTextField(obscureText: false, hintText: 'Owner Email'),
+        ),
+        AnimatedSwitcher(
+          duration: const Duration(milliseconds: 300),
+          child: isOwner
+              ? _buildTextField(obscureText: true, hintText: 'Password')
+              : _buildTextField(obscureText: false, hintText: 'Username'),
+        ),
+        AnimatedSize(
+          duration: const Duration(milliseconds: 300),
+          child: isOwner
+              ? const SizedBox.shrink()
+              : _buildTextField(obscureText: true, hintText: 'Password'),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildTextField({required bool obscureText, required String hintText}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      child: TextField(
+        onChanged: (value) => _handleTextFieldChange(hintText, value),
+        obscureText: obscureText,
+        style: _getTextStyle(mainColor3),
+        decoration: _getInputDecoration(hintText),
+      ),
+    );
+  }
+
+  void _handleTextFieldChange(String hintText, String value) {
+    setState(() {
+      switch (hintText) {
+        case 'Email':
+        case 'Owner Email':
+          email = value;
+          isEmailValid = EmailValidator.validate(value);
+          break;
+        case 'Password':
+          password = value;
+          break;
+        case 'Username':
+          username = value;
+          break;
+      }
+    });
+  }
+
+  TextStyle _getTextStyle(Color color) {
+    return GoogleFonts.roboto(
+      fontWeight: FontWeight.w500,
+      fontSize: 16,
+      color: color,
+    );
+  }
+
+  InputDecoration _getInputDecoration(String hintText) {
+    return InputDecoration(
+      fillColor: Colors.white.withOpacity(0.5),
+      filled: true,
+      contentPadding:
+          const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
+      hintText: hintText,
+      hintStyle: GoogleFonts.roboto(
+        fontWeight: FontWeight.w500,
+        fontSize: 16,
+        color: mainColor3.withOpacity(.7),
+      ),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(100),
+        borderSide: BorderSide(color: mainColor1.withOpacity(0.3)),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(100),
+        borderSide: BorderSide(color: mainColor1.withOpacity(0.3)),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(100),
+        borderSide: BorderSide(color: mainColor1),
+      ),
+      errorText: (hintText == 'Email' || hintText == 'Owner Email') && !isEmailValid && email.isNotEmpty
+          ? 'Invalid email'
+          : null,
+      errorStyle: GoogleFonts.roboto(
+        fontWeight: FontWeight.w500,
+        fontSize: 14,
+        color: mainColor2,
+      ),
+    );
+  }
+
+  Widget _buildForgotPassword() {
+    return Align(
+      alignment: Alignment.centerRight,
+      child: InkWell(
+        onTap: () {
+          //TODO: forgot password
+        },
+        child: Text(
+          'Forgot Password?',
+          style: GoogleFonts.roboto(
+            fontWeight: FontWeight.w500,
+            fontSize: 13,
+            color: mainColor2,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildLoginButton() {
+    return Column(
+      children: [
+        InkWell(
+          onTap: _handleLogin,
+          child: Container(
+            padding: const EdgeInsets.symmetric(
+                vertical: 10, horizontal: 25),
+            decoration: BoxDecoration(
+              gradient: const LinearGradient(
+                colors: [mainColor1, mainColor2],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              borderRadius: BorderRadius.circular(100),
+            ),
+            child: Text(
+              'Login',
+              style: GoogleFonts.roboto(
+                fontWeight: FontWeight.w500,
+                fontSize: 16,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+        if (emptyFields)
+          Center(
+            child: Text(
+              'Please fill all fields',
+              style: GoogleFonts.roboto(
+                fontWeight: FontWeight.w500,
+                fontSize: 13,
+                color: mainColor2,
+              ),
+            ),
+          ),
+      ],
+    );
+  }
+
+  Widget _buildSignupPrompt() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          'Don\'t have an account',
+          style: GoogleFonts.roboto(
+            fontWeight: FontWeight.w500,
+            fontSize: 14,
+            color: mainColor3.withOpacity(.7),
+          ),
+        ),
+        InkWell(
+          onTap: () {
+            //TODO: signup
+          },
+          child: Text(
+            '  Signup',
+            style: GoogleFonts.roboto(
+              fontWeight: FontWeight.w500,
+              fontSize: 14,
+              color: mainColor2,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  void _handleLogin() {
+    setState(() {
+      emptyFields = false;
+    });
+    if (_validateFields()) {
+      _performLogin();
+    } else {
+      setState(() {
+        emptyFields = true;
+      });
+    }
+  }
+
+  bool _validateFields() {
+    if (isOwner) {
+      return isEmailValid && password.isNotEmpty && email.isNotEmpty;
+    } else {
+      return isEmailValid && password.isNotEmpty && email.isNotEmpty && username.isNotEmpty;
+    }
+  }
+
+  void _performLogin() {
+    if (isOwner) {
+      print('Owner login: $email, $password');
+    } else {
+      print('User login: $email, $username, $password');
+    }
   }
 }
