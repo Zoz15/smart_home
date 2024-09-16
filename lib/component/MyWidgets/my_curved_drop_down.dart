@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class CurvedDropdown extends StatefulWidget {
   @override
+  // ignore: library_private_types_in_public_api
   _CurvedDropdownState createState() => _CurvedDropdownState();
 
   final List<String> items;

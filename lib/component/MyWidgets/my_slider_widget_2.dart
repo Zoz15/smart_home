@@ -4,13 +4,16 @@ import 'dart:math';
 
 import 'package:google_fonts/google_fonts.dart';
 
+// ignore: camel_case_types
 class My_slider_widget_2 extends StatefulWidget {
   const My_slider_widget_2({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _My_slider_widget_2State createState() => _My_slider_widget_2State();
 }
 
+// ignore: camel_case_types
 class _My_slider_widget_2State extends State<My_slider_widget_2> {
   double _currentValue = 10.0;
   final double _minValue = 10;

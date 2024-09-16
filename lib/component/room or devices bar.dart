@@ -1,3 +1,4 @@
+// ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_home/controllers/room_and_devise_controller.dart';
@@ -12,11 +13,11 @@ class RoomOrDevicesBar extends StatefulWidget {
 
 class _RoomOrDevicesBarState extends State<RoomOrDevicesBar> {
   @override
-  // void dispose() {
-  //   // TODO: implement dispose
-  //   super.dispose();
-  //   widget.customController.dispose();
-  // }
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    widget.customController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

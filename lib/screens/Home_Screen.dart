@@ -57,25 +57,27 @@ class _HomeScreenState extends State<HomeScreen> {
                           const SizedBox(height: 130),
                           const MyLocation(),
                           RoomOrDevicesBar(
-                              customController: widget._customController),
+                            customController: widget._customController,
+                          ),
                           AnimatedSwitcher(
                             duration: const Duration(milliseconds: 300),
                             child: widget._customController.isRoom
                                 ? const RoomWidget()
                                 : const DevicesWidget(),
                           ),
-                          Align(
-                            alignment: Alignment.bottomCenter,
-                            child: MyBottomNavigationBar(
-                                customController:
-                                    widget._customController2),
-                          ),
                         ],
                       ),
                     ),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: MyBottomNavigationBar(
+                        customController: widget._customController2,
+                      ),
+                    ),
                     const Align(
-                        alignment: Alignment.topCenter,
-                        child: TopNavigationBar()),
+                      alignment: Alignment.topCenter,
+                      child: TopNavigationBar(),
+                    ),
                   ],
                 ),
         ),

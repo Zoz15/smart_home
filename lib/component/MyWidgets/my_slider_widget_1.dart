@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+// ignore: camel_case_types
 class My_slider_widget_1 extends CustomPainter {
   final double progress;
   final double strokeWidth;

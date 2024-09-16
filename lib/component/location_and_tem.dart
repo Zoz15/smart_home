@@ -64,7 +64,7 @@ class MyLocation extends StatelessWidget {
         SizedBox(
           height: 15,
           width: 15,
-          child: SvgPicture.asset('assets/vectors/vector_3_x2.svg'),
+          child: SvgPicture.asset('assets/vectors/weather.svg'),
         ),
         const SizedBox(width: 5),
         _buildText('Partly Cloudy', 13, FontWeight.w400,
